@@ -1,104 +1,59 @@
-
 import React, {Component} from 'react';
-import {View, Text, Button} from 'react-native';
-import MapView from 'react-native-maps';
+import { View,Dimensions} from 'react-native';
+//import MapView from 'react-native-maps';
+import GeoToggle from './components/GeoToggle';
+
+
+const HEIGHT_INPUT = Dimensions.get('window').height /10;
+const WIDTH_DEVICE = Dimensions.get('window').width;
+const HEIGHT_DEVICE = Dimensions.get('window').height;
 
 class Map extends Component {
+
   state = {
-    location : {
-      latitude: 37.7900352,
-      longitude: -122.4013726,
-      latitudeDelta: 0.04,
-      longitudeDelta: 0.09
-    }, 
-    locationChoosen : false,
-  };
-  onPickLocation = event =>{
-    
-    const coords = event.nativeEvent.coordinate;
-    this.map.animateToRegion({
-      latitude : coords.latitude,
-      longitude : coords.longitude,
-      latitudeDelta: 0.04,
-      longitudeDelta: 0.09
-    })
-    this.setState(
-      {
-        location: {
-          longitude: coords.longitude,
-          latitude: coords.latitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.09
-        },
-        locationChoosen: true,
-      }
-      
-        
-    );
+    geolocation : false,
   }
-  getLocationHandler = () =>{
-    navigator.geolocation.getCurrentPosition(pos =>{
-      console.log(pos);
 
-      const coordsEvent = {
-        nativeEvent : {
-          coordinate : {
-            latitude : pos.coords.latitude,
-            longitude : pos.coords.longitude
-          }
-        }
-      };
-      this.onPickLocation(coordsEvent);
-
-    },
-    err => {
-      console.log(err);
-      alert('Fetching the position Failed, Please Pick one Manually!')
-    }
-  )
-  }
 
   render(){
-     let marker  = null;
-     if (this.state.locationChoosen){
-       marker = <MapView.Marker coordinate = {this.state.location}
-        />
-     }
+
+
+
     return (
-      <View style={{flex : 1}}>
-        <MapView
-          initialRegion = {this.state.location}
-          style = {styles.mapStyles}
-          onPress = { this.onPickLocation}
-          ref = {ref => this.map = ref}
-        >
-          {marker}
-        </MapView>
-        <View style= {styles.buttonStyles}>
-          <Button title ='Turn Geolocation On '
-          onPress = {this.getLocationHandler} 
-          color="rgba(255, 0, 0, 0.5)"
-          />
-        </View>
-      </View>
+       <View style= {{flex : 1}}>
+             <GeoToggle geolocation={false}/>
+       </View>
     )
   }
 }
 
 const styles = {
+  buttonInputWrapper : {
+    marginTop : 5 ,
+    flexDirection : 'row',
+    height : HEIGHT_INPUT,
+    justifyContent : 'space-around',
+    backgroundColor : '#eee'
+
+  },
   buttonStyles : {
     borderRadius : 20,
     alignSelf : "center",
     position: 'absolute',
     bottom: 20,
     left: 10,
-    right: 10, 
-    
+    right: 10,
+
   },
   mapStyles : {
-    width : "100%",
-    height : "90%",
+    width : WIDTH_DEVICE,
+    height : HEIGHT_DEVICE,
     flex : 1,
+  },
+  inputStyles : { paddingLeft : 5,
+                 flex : 1,
+                fontSize : 20
+
   }
 };
 

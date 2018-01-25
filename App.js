@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -11,6 +5,10 @@ import {
   Text,
   View
 } from 'react-native';
+import { Provider } from 'react-redux' ;
+import store from './store' ;
+import AppNavigation from './navigation/AppNavigation';
+
 import Map from './Map';
 
 
@@ -18,28 +16,23 @@ import Map from './Map';
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
+      <Provider store={store} >
+         <View style= {styles.container} >
 
-      <Map />
-      </View>
+            <AppNavigation />
+
+
+         </View>
+       </Provider>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  container : {
+      flex: 1,
+      //marginTop : Platform.OS === 'android' ? 24 : 0,
+      backgroundColor : '#eed'
+    },
 
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });

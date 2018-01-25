@@ -227,7 +227,7 @@ const styles = {
     borderRadius : 20,
     alignSelf : "center",
     position: 'absolute',
-    bottom: 100,
+    bottom: HEIGHT_DEVICE/3.5,
     left: 10,
     right: 10,
 

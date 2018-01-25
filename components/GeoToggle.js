@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { View, Text, ActivityIndicator , Platform, TextInput,Dimensions, Button, ScrollView
 } from 'react-native';
 import MapView from 'react-native-maps';
+import { connect } from 'react-redux' ;
+import {Card , CardSecttion } from './common';
+import * as actions from '../actions' ;
 
 const HEIGHT_INPUT = Dimensions.get('window').height /10;
 const WIDTH_DEVICE = Dimensions.get('window').width;
@@ -82,12 +85,13 @@ class GeoToggle extends Component {
   }
 
 onButtonSearch = ()=>{
-  alert('Go fetch some Jobs For YA!!')
-  //this.setState({loading : true});
+  //alert('Go fetch some Jobs For YA!!')
+  this.setState({ loading  : true });
+     this.props.fetchjobs(this.state.location, this.state.query, () =>{
+     this.props.navToResults  ;
+     this.setState({ loading  : false });
 
-  // Fetch some jobs
-
-  //DON'T Forget to  : this.setState({loading : false}) in the body of the asunc action
+   });
 
 }
 
@@ -244,4 +248,4 @@ const styles = {
   }
 };
 
-export default GeoToggle;
+export default connect(null , actions)(GeoToggle);

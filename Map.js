@@ -17,11 +17,15 @@ class Map extends Component {
 
   render(){
 
+    const navToResults = this.props.navigation.navigate('results');
+
 
 
     return (
        <View style= {{flex : 1}}>
-             <GeoToggle geolocation={false}/>
+             <GeoToggle geolocation={false}
+                        navToResults  = {navToResults}         
+             />
        </View>
     )
   }

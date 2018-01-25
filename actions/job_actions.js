@@ -18,7 +18,7 @@ const JOB_QUERY_PARAMS = {
 };
 
 const buildJobsUrl = (zip, query) => {
-  const queryString = qs.stringify({ ...JOB_QUERY_PARAMS, l: zip , q : query,//key:'AIzaSyC_gLQLGzPZcpEIdddQYPK0WsyciCbesrA'
+  const queryString = qs.stringify({ ...JOB_QUERY_PARAMS, l: zip , q : query,key:'AIzaSyCsa7JXkq18w1PS5ZuaN48BFEkEzqu_ZEQ'
 
   });
   return `${JOB_ROOT_URL}${queryString}`;
@@ -33,8 +33,8 @@ export const fetchjobs =  (region , query , callback) => {
           let zip = await reverseGeocode(region);
           // making the actual request
           //const url = buildJobsUrl(zip,query);
-          const API_KEY ='AIzaSyASe0SW12NHmrEFtk-Z1A92iPQ8wjStum8';
-          const url = `http://api.indeed.com/ads/apisearch?publisher=4201738803816157&q=${query}&l=${zip}&latlong=1&radius=%2025&v=2&format=json` ;
+          const API_KEY ='AIzaSyCsa7JXkq18w1PS5ZuaN48BFEkEzqu_ZEQ';
+          const url = `http://api.indeed.com/ads/apisearch?publisher=4201738803816157&q=${query}&l=${zip}&latlong=1&radius=%2025&v=2&format=json&key=AIzaSyCsa7JXkq18w1PS5ZuaN48BFEkEzqu_ZEQ` ;
           /*
           `http://api.indeed.com/ads/apisearch?publisher=4201738803816157&q=${query}&l=${zip}&latlong=1&radius=%2025&v=2&format=json&key=${API_KEY}`
           */
@@ -42,7 +42,7 @@ export const fetchjobs =  (region , query , callback) => {
           //console.log('data iside action creator');
           //console.log(data)
           console.log('results inside action creator----')
-          console.log(data.results);
+          console.log(data);
 
           if( typeof data.results[0] === 'object'){
 

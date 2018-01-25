@@ -1,7 +1,11 @@
-import React from 'react';
-import { View , Text } from 'react-native' ;
+import React, { Component } from 'react';
+import { View, Text, Platform, ScrollView, Linking, Alert} from 'react-native';
+import { Button, Card } from '../components/common';
+import { connect } from 'react-redux';
 
-class ResultsScreen extends React.Component {
+import  MapView from 'react-native-maps';
+import * as actions from '../actions' ;
+class ResultsScreen extends Component {
 
   render(){
     return(
@@ -14,5 +18,12 @@ class ResultsScreen extends React.Component {
   }
 }
 
-
-export default ResultsScreen;
+/*
+function mapStateToProps(state) {
+  return { jobs: state.jobs.results,
+          error : state.error,
+          nojobs: state.nojobs
+   };
+}
+*/
+export default connect(null, actions)(ResultsScreen);
